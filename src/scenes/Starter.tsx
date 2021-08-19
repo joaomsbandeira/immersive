@@ -1,21 +1,24 @@
-import { Background, Floating, Fog, StandardEnvironment } from "spacesvr";
-import { Color } from "three";
+import { Background, Fog, StandardEnvironment, Image } from "spacesvr";
+import * as THREE from "three";
+import Cubes from "./Cubes";
+import FollowPlayer from "./FollowPlayer";
+import GroovyLight from "./GroovyLight";
 
 export default function Starter() {
   return (
     <StandardEnvironment>
       <Background color="white" />
-      <Fog color={new Color("white")} near={10} far={100} />
+
+      <Fog color={new THREE.Color("white")} near={0} far={20} />
+      <Cubes />
       <ambientLight />
-      <Floating>
-        <mesh position-y={1}>
-          <torusBufferGeometry />
-          <meshStandardMaterial color="blue" />
-        </mesh>
-      </Floating>
+      <FollowPlayer>
+        <GroovyLight />
+      </FollowPlayer>
+
       <mesh rotation-x={-Math.PI / 2}>
-        <planeBufferGeometry args={[1000, 1000]} />
-        <meshStandardMaterial color="red" />
+        <planeBufferGeometry args={[200, 200]} />
+        <meshStandardMaterial color="white" />
       </mesh>
     </StandardEnvironment>
   );
